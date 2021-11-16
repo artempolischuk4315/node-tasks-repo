@@ -1,0 +1,22 @@
+{
+  "name": "tasks-repo",
+  "version": "1.0.0",
+  "description": "Node.js mentoring program home tasks repository",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artempolischuk4315/node-tasks-repo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/artempolischuk4315/node-tasks-repo/issues"
+  },
+  "homepage": "https://github.com/artempolischuk4315/node-tasks-repo#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
