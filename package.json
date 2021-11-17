@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "task1": "node task1.js",
-    "task2": "node task2.js"
+    "task1": "node src/task1.js",
+    "task2": "node src/task2.js",
+    "build": "babel src -d dist"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,9 @@
   },
   "homepage": "https://github.com/artempolischuk4315/node-tasks-repo#readme",
   "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
     "csvtojson": "^2.0.10",
     "nodemon": "^2.0.15"
   }
