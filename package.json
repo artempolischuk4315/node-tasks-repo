@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "task1": "node task1.js"
+    "task1": "node task1.js",
+    "task2": "node task2.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/artempolischuk4315/node-tasks-repo#readme",
   "devDependencies": {
+    "csvtojson": "^2.0.10",
     "nodemon": "^2.0.15"
   }
 }
