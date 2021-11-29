@@ -2,8 +2,8 @@ const { pipeline } = require('stream');
 const fs = require('fs');
 const csv = require('csvtojson');
 
-const readStream = fs.createReadStream('./csv/data_task2.csv')
-const writeStream = fs.createWriteStream('result.txt')
+const readStream = fs.createReadStream('./csv/data_task2.csv');
+const writeStream = fs.createWriteStream('result.txt');
 
 pipeline(
     readStream,
@@ -16,4 +16,4 @@ pipeline(
             console.log('Pipeline succeeded.');
         }
     }
-)
+);
