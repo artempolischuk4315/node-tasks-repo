@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "npx eslint --fix src",
-    "task1": "nodemon --exec babel-node src/task1.js",
-    "task2": "nodemon --exec babel-node src/task2.js",
+    "task1": "nodemon --exec babel-node src/task1/task1.js",
+    "task2": "nodemon --exec babel-node src/task1/task2.js",
+    "task3": "node src/task2/userHandler.js",
     "build": "babel src -d dist"
   },
   "repository": {
@@ -28,5 +29,9 @@
     "eslint": "^8.3.0",
     "@babel/eslint-parser": "^7.5.4",
     "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "joi": "^17.5.0"
   }
 }
