@@ -27,5 +27,6 @@ function validateUpdateRequest(input) {
 
 module.exports = {
     validateCreateRequest,
-    validateUpdateRequest
+    validateUpdateRequest,
+    schema: createIntentSchema
 };

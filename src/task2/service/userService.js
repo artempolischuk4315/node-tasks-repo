@@ -14,8 +14,7 @@ async function createUser(payload) {
 async function updateUser(id, userData) {
     const user = await userRepository.getUser(id);
     if (user) {
-        updateUserWithNewData(user, userData);
-        return await userRepository.saveUser(user);
+        return await userRepository.saveUser(updateUserWithNewData(user, userData));
     }
     throw new Error(sharedConstants.USER_NOT_FOUND_MESSAGE);
 }
@@ -32,33 +31,24 @@ async function deleteUser(id) {
     const user = await userRepository.getUser(id);
     if (user) {
         user.isDeleted = true;
-        return await userRepository.saveUser(user);
+        return userRepository.deleteUser(user);
     }
     throw new Error(sharedConstants.USER_NOT_FOUND_MESSAGE);
 }
 
 async function getAutoSuggestUsers(loginSubstring, limit) {
-    const users = await userRepository.getAll();
-    const result = [];
-
-    for (const user of users) {
-        addUserToResultIfSatisfiesConditions(result, limit, user, loginSubstring);
-    }
-
-    return result;
-}
-
-function addUserToResultIfSatisfiesConditions(result, limit, user, loginSubstring) {
-    if (result.length < limit && user.login && user.login.includes(loginSubstring)) {
-        result.push(user);
-    }
+    return await userRepository.getAutoSuggestUsers(loginSubstring, limit)
 }
 
 function updateUserWithNewData(user, userData) {
-    user.login = userData.login;
-    user.password = userData.password;
-    user.age = userData.age;
-    user.isDeleted = userData.isDeleted;
+    const updatedUser = { ...user };
+
+    updatedUser.login = userData.login;
+    updatedUser.password = userData.password;
+    updatedUser.age = userData.age;
+    updatedUser.isDeleted = userData.isDeleted;
+
+    return updatedUser;
 }
 
 module.exports = {

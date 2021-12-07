@@ -13,7 +13,7 @@ async function addUser(req, res) {
         return res.status(400).json(validationResult.details);
     }
 
-    createUser(requestBody)
+    return createUser(requestBody)
         .then((user) => res.status(200).json(user))
         .catch(error => resolveError(error, res, requestBody.id, CREATE_OPERATION));
 }
@@ -26,27 +26,27 @@ async function applyPatchToUser(req, res) {
     }
 
     const id = req.params.id;
-    updateUser(id, req.body)
+    return updateUser(id, req.body)
         .then((user) => res.status(200).json(user))
         .catch(error => resolveError(error, res, id, UPDATE_OPERATION));
 }
 
 async function retrieveUser(req, res) {
     const id = req.params.id;
-    getUser(id)
+    return getUser(id)
         .then((user) => res.status(200).json(user))
         .catch(error => resolveError(error, res, id, GET_OPERATION));
 }
 
 async function markUserAsDeleted(req, res) {
     const id = req.params.id;
-    deleteUser(id)
+    return deleteUser(id)
         .then(() => res.status(200).json({ message: 'User successfully deleted' }))
         .catch(error => resolveError(error, res, id, DELETE_OPERATION));
 }
 
 async function getAutoSuggestUsersList(req, res) {
-    getAutoSuggestUsers(req.query.loginSubstring, req.query.limit)
+    return getAutoSuggestUsers(req.query.loginSubstring, req.query.limit)
         .then((result) => res.status(200).json(result))
         .catch(() => res.status(500).json({ message: 'Error occurred during retrieving users' }));
 }
