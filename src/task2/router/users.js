@@ -3,12 +3,12 @@ const { addUser, retrieveUser, updateUser, deleteUser, getAutoSuggestUsers } = r
 const router = express.Router();
 
 router.route('/')
-    .get((req, res) => getAutoSuggestUsers(req, res))
-    .post((req, res) => addUser(req, res));
+    .get((req, res, next) => getAutoSuggestUsers(req, res, next))
+    .post((req, res, next) => addUser(req, res, next));
 
 router.route('/:id')
-    .get((req, res) => retrieveUser(req, res))
-    .put((req, res) => updateUser(req, res))
-    .delete((req, res) => deleteUser(req, res));
+    .get((req, res, next) => retrieveUser(req, res, next))
+    .put((req, res, next) => updateUser(req, res, next))
+    .delete((req, res, next) => deleteUser(req, res, next));
 
 module.exports = router;
