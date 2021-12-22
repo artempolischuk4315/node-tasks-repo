@@ -11,8 +11,8 @@ async function addUser(req, res, next) {
     const requestBody = req.body;
     const validationResult = userValidator.validateCreateRequest(requestBody);
     if (validationResult) {
-        return next(new CustomError(JSON.stringify(validationResult.details),
-            400, req.method, req.body, req.query, CREATE_OPERATION))
+        let message = getValidationFailedMessage(validationResult);
+        return next(new CustomError(message, 400, req.method, req.body, req.query, CREATE_OPERATION))
     }
 
     return createUser(requestBody)
@@ -24,8 +24,8 @@ async function applyPatchToUser(req, res, next) {
     const requestBody = req.body;
     const validationResult = userValidator.validateUpdateRequest(requestBody);
     if (validationResult) {
-        return next(new CustomError(JSON.stringify(validationResult.details),
-            400, req.method, req.body, req.query, UPDATE_OPERATION))
+        let message = getValidationFailedMessage(validationResult);
+        return next(new CustomError(message, 400, req.method, req.body, req.query, UPDATE_OPERATION))
     }
 
     const id = req.params.id;
@@ -72,6 +72,14 @@ function resolveError(error, req, id, operation, next) {
 function getInternalServerErrorForUser(req, operation, id, next) {
     return next(new CustomError(`Error occurred during ${operation} operation for user with id ${id}`,
         500, req.method, req.body, req.query, operation))
+}
+
+function getValidationFailedMessage(validationResult) {
+    let message = '';
+    for (let i = 0; i < validationResult.details.length; i++) {
+        message = message + validationResult.details[i].message + '\n';
+    }
+    return message;
 }
 
 module.exports = {

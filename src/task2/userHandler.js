@@ -34,4 +34,4 @@ app.use(function (err, req, res, next) {
     return res.status(500).send('Internal error occurred')
 })
 
-app.listen(3015, () => console.log('Listening at http://localhost:3015'));
+module.exports = app
