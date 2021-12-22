@@ -26,10 +26,6 @@ const user = {
     isDeleted: IS_DELETED
 }
 
-afterAll(() => {
-    jest.resetAllMocks()
-})
-
 afterEach(() => {
     jest.clearAllMocks()
 })
@@ -45,12 +41,14 @@ describe('Create user', () => {
     })
 
     test('should throw expected exception when user already exists', async () => {
-        const error = new Error(USER_ALREADY_EXISTS_MESSAGE)
+        const expectedError = new Error(USER_ALREADY_EXISTS_MESSAGE)
         userRepository.getUser.mockResolvedValue(user)
 
-        await expect(async () => {
+        try {
             await userService.createUser(payload)
-        }).rejects.toThrow(error)
+        } catch (error) {
+            expect(error).toStrictEqual(expectedError)
+        }
     })
 
     test('should pass expected argument to save method of user repository', async () => {
@@ -78,12 +76,14 @@ describe('Get user', () => {
     })
 
     test('should throw expected exception when user not found', async () => {
-        const error = new Error(USER_NOT_FOUND_MESSAGE)
+        const expectedError = new Error(USER_NOT_FOUND_MESSAGE)
         userRepository.getUser.mockResolvedValue(null)
 
-        await expect(async () => {
+        try {
             await userService.getUser(USER_NOT_FOUND_MESSAGE)
-        }).rejects.toThrow(error)
+        } catch (error) {
+            expect(error).toStrictEqual(expectedError)
+        }
     })
 
     test('should pass expected argument to user repository', async () => {
@@ -106,12 +106,14 @@ describe('Delete user', () => {
     })
 
     test('should throw expected exception when user not found', async () => {
-        const error = new Error(USER_NOT_FOUND_MESSAGE)
+        const expectedError = new Error(USER_NOT_FOUND_MESSAGE)
         userRepository.getUser.mockResolvedValue(null)
 
-        await expect(async () => {
+        try {
             await userService.deleteUser(USER_NOT_FOUND_MESSAGE)
-        }).rejects.toThrow(error)
+        } catch (error) {
+            expect(error).toStrictEqual(expectedError)
+        }
     })
 
     test('should pass expected argument to delete method of user repository', async () => {
@@ -157,11 +159,13 @@ describe('Update user', () => {
 
     test('should throw expected exception when user not found', async () => {
         userRepository.getUser.mockResolvedValue(null)
-        const error = new Error(USER_NOT_FOUND_MESSAGE)
+        const expectedError = new Error(USER_NOT_FOUND_MESSAGE)
 
-        await expect(async () => {
+        try {
             await userService.updateUser(USER_ID, updatePayload)
-        }).rejects.toThrow(error)
+        } catch (error) {
+            expect(error).toStrictEqual(expectedError)
+        }
     })
 
     test('should pass expected argument to save method of user repository', async () => {

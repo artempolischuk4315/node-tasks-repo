@@ -58,7 +58,7 @@ describe('Get user', () => {
     })
 
     test('should pass expected argument to get method of dataBase', async () => {
-        await userRepository.saveUser(user)
+        await userRepository.getUser(USER_ID)
 
         expect(dataBase.get).toHaveBeenCalledWith(USER_ID)
     })
