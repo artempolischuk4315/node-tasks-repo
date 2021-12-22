@@ -23,11 +23,12 @@
   "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.5.4",
     "@babel/node": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "csvtojson": "^2.0.10",
     "eslint": "^8.3.0",
-    "@babel/eslint-parser": "^7.5.4",
+    "jest": "^27.4.5",
     "nodemon": "^2.0.15"
   },
   "dependencies": {
