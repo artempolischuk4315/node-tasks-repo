@@ -1,4 +1,4 @@
-const dataBase = new Map();
+const dataBase = require('./dataBase');
 
 async function saveUser(user) {
     dataBase.set(user.id, user);
@@ -21,7 +21,7 @@ async function deleteUser(user) {
     userCopy.isDeleted = true
 
     dataBase.set(userCopy.id, userCopy);
-    return user;
+    return userCopy;
 }
 
 async function getAutoSuggestUsers(loginSubstring, limit) {
